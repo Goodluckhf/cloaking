@@ -35,6 +35,7 @@ class AddClient {
 
         if (! $client) {
             $this->addNewClient($request, $offer->id);
+            return $next($request);
         }
 
         $client->touch();
