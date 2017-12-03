@@ -19,8 +19,7 @@ class OfferController extends Controller {
             ->first();
 
         if (! $offer) {
-            return response('404 Not Found', 404)
-                ->header('Content-Type', 'text/plain');
+           return abort(404);
         }
 
         return view('landings.' . $offer->landing->name, [
@@ -36,8 +35,7 @@ class OfferController extends Controller {
             ->first();
 
         if (! $offer) {
-            return response('404 Not Found', 404)
-                ->header('Content-Type', 'text/plain');
+            return abort(404);
         }
 
         if (isset($_SERVER['HTTP_X_REAL_IP'])) {
@@ -88,9 +86,17 @@ class OfferController extends Controller {
         $result = json_decode(curl_exec($handle), true);
 
         curl_close($handle);
-        dd($result);
 
+        if ($result['status'] !== 'ok' || $result['additional_status'] != 0) {
+            \Log::info('error: ', [
+                'client: ' => $clientId,
+                'offer' => $offer->id,
+                'err' => $result,
+            ]);
+            return abort(404);
+        } else {
+            return redirect('/landing/' . $offer->landing->name . '/success.html');
+        }
 
-        return redirect('/landing/' . $offer->landing->name . '/success.html');
     }
 }
