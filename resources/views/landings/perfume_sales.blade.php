@@ -157,7 +157,7 @@
             </div>
         </div>
         <div class="item item1 tov-item">
-            <h2><strong>Chanel</strong> <br><span clas<meta name="csrf-token" content="{{ csrf_token() }}">s="sub-title">Chance 100 ml</span></h2>
+            <h2><strong>Chanel</strong> <br><span class="sub-title">Chance 100 ml</span></h2>
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">

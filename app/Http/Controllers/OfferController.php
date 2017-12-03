@@ -67,7 +67,7 @@ class OfferController extends Controller {
                 'network'   => 'ad1', // название сети
                 'thread'    => $id, // id потока из ad1.ru, например bakm
                 'subid'     => '', // 5 субайди, например subid1:subid2:subid3:subid4:subid5 (не обязательно)
-                'site_key'  => '' // ключ
+                'site_key'  => 'a5d2b4d981' // ключ
             ]
         ];
 
@@ -82,11 +82,13 @@ class OfferController extends Controller {
 
         $infocdnJson = json_encode($infocdnData);
         //dd($infocdnJson);
-        /*$handle = curl_init('http://infocdn.org/interface/api.php');
+        $handle = curl_init('http://infocdn.org/interface/api.php');
         curl_setopt($handle, CURLOPT_POSTFIELDS, urlencode($infocdnJson));
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($handle);
-        curl_close($handle);*/
+        $result = json_decode(curl_exec($handle), true);
+
+        curl_close($handle);
+        dd($result);
 
 
         return redirect('/landing/' . $offer->landing->name . '/success.html');
