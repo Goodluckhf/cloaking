@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <title>Распродажа духов по 1 рублю</title>
     <!-- Favicon -->
-    <link rel="icon" href="http://infocdn.org/img/products_new/1906.png" type="image/png">
-    <link rel="shortcut icon" href="http://infocdn.org/img/products_new/1906.png" type="image/png">
-
+    <link rel="icon" href="{{$publicPath}}/img/1906.png" type="image/png">
+    <link rel="shortcut icon" href="{{$publicPath}}/img/1906.png" type="image/png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- OG -->
-    <meta property="og:url" content="http://vip.perfume-sales.com/" />
+    <meta property="og:url" content="http://{{$host}}/{{$thread}}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Распродажа духов по 1 рублю" />
-    <meta property="og:image" content="http://infocdn.org/img/products_new/1906.png" />
+    <meta property="og:image" content="{{$publicPath}}/img/1906.png" />
     <meta property="og:site_name" content="Распродажа духов по 1 рублю" />
     <meta property="og:description" content="Распродажа духов по 1 рублю" />
 
@@ -26,15 +26,15 @@
 
 
 
-    <link rel="shortcut icon" type="image/x-icon" href="/files/parfum_free_mobile_1/favicon.ico" >
+    <link rel="shortcut icon" type="image/x-icon" href="{{$publicPath}}/parfum_free_mobile_1/favicon.ico" >
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;subset=cyrillic" rel="stylesheet">
     <!-- CSS -->
-    <link type="text/css" href="/files/parfum_free_mobile_1/css/style.css?v=3" rel="stylesheet"/>
+    <link type="text/css" href="{{$publicPath}}/parfum_free_mobile_1/css/style.css?v=3" rel="stylesheet"/>
 
     <!-- JS -->
-    <script type="text/javascript" src="http://infocdn-test.com/files/_js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="http://infocdn-test.com/files/_js/ab.min.js"></script>
-    <script type="text/javascript" src="/files/_js/validation.js"></script>
+    <script type="text/javascript" src="{{$publicPath}}/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="{{$publicPath}}/js/ab.min.js"></script>
+    <script type="text/javascript" src="{{$publicPath}}/js/validation.js"></script>
     <script type="text/javascript">$jsonData = {"product":{"id":1906,"name":"Распродажа духов по 1 рублю","title":"Распродажа духов по 1 рублю","short_description":"Распродажа духов по 1 рублю","full_description":"Распродажа духов по 1 рублю"},"prices":{"271":{"price":1,"old_price":1990,"delivery_price":0,"tax_price":0,"upsale_price":0,"geo_key":"RU","name":"Россия","currency":"руб.","rate":1,"phone_template":"+7 928 827-22-53","address_template":"135999, Москва, ул. Ленина, д.10, кв.5","name_template":"Петров Петр Петрович","active":true}},"lowPrice":{"year":"2017","month":"12","day":"05"}};	var landDir = 'parfum_free_mobile_1';</script>
 </head>
 <body > <script type="text/javascript">
@@ -64,34 +64,14 @@
     };
 </script>
 
-<script type="text/javascript" src="files/_blocks/notificators/func.js?9"></script>
+<script type="text/javascript" src="{{$publicPath}}/_blocks/notificators/func.js?9"></script>
 
 
 <script>
     var formIsSubmitted = false;
 </script>
 
-<script type="text/javascript" src="files/_blocks/notificators/unload_submit.js?6"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script type="text/javascript" src="{{$publicPath}}/_blocks/notificators/unload_submit.js?6"></script>
 
 <script>
     try {
@@ -102,7 +82,7 @@
 </script>
 <div class="main-wrap">
     <div class="new-header">
-        <header><img src="/files/parfum_free_mobile_1/img/main.jpg" alt=""></header>
+        <header><img src="{{$publicPath}}/parfum_free_mobile_1/img/main.jpg" alt=""></header>
         <div class="timer">
             <h2 class="title">Распродажа закрывается через:</h2>
             <div class="timer-container" id="timer-v2">
@@ -128,7 +108,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/1424698929670656.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/1424698929670656.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -147,7 +127,7 @@
                         Духи Императрица выбирает женщина из аристократического общества. Она изысканна и ослепительна. С королевской осанкой она проходит мимо покоренных мужчин, оставляя шлейф из сладостных цветов жасмина. А экзотические фрукты, сочный арбуз, розовый перец и ноты киви переплетаются с мускусом и навсегда отпечатываются в подсознании влюбленного лорда. Ваше сиятельство, вы обворожительны!
 
                     </p>
-                    <a href="#cart"  data-id="7284134" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/1424698929670656.200x200.jpg" data-header="Dolce & Gabbana L’Imperatrice 3 100 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284134" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/1424698929670656.200x200.jpg" data-header="Dolce & Gabbana L’Imperatrice 3 100 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -156,7 +136,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/paco-rabanne-black-xs.180x180.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/paco-rabanne-black-xs.180x180.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -172,16 +152,16 @@
                     <p class="hover_p">
                         Это ода наслаждению, живым эмоциям и головокружительным поцелуям. Волнующий и притягательный аромат адресован страстной женщине, получающей удовольствие от мимолетного флирта и чувственного романа. Она пробуждает в мужчинах вожделение, сводит с ума своей грациозной походкой и соблазнительными очертаниями фигуры. С ней можно часами любоваться звездами и удивляться, как в ее характере необычным образом соединена природная мягкость с несгибаемой силой духа. Ее любимое время – вечер, окутывающий встречи завесой тайны.
                     </p>
-                    <a href="#cart"  data-id="7284135" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/paco-rabanne-black-xs.180x180.png" data-header="Paco Rabanne Black XS pour Femme edT 80 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284135" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/paco-rabanne-black-xs.180x180.png" data-header="Paco Rabanne Black XS pour Femme edT 80 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
         <div class="item item1 tov-item">
-            <h2><strong>Chanel</strong> <br><span class="sub-title">Chance 100 ml</span></h2>
+            <h2><strong>Chanel</strong> <br><span clas<meta name="csrf-token" content="{{ csrf_token() }}">s="sub-title">Chance 100 ml</span></h2>
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/chanel_chance.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/chanel_chance.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -197,7 +177,7 @@
                     <p class="hover_p">
                         Игристый цветочный аромат в округлом флаконе. Поток его энергии закружит вас в вихре фантазии и счастья. И унесет навстречу удаче. Игристый цветочный аромат, в котором сплелись свежие брызги цедрата, мягкость жасмина и пронзительные нотки тикового дерева. Вихрь энергии и радости жизни. Туалетная вода в форме спрея наносится на кожу или одежду широким, мягким движением.
                     </p>
-                    <a href="#cart"  data-id="7284136" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/chanel_chance.png" data-header="Chanel Chance 100 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284136" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/chanel_chance.png" data-header="Chanel Chance 100 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -206,7 +186,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/1591215_0000-500x500.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/1591215_0000-500x500.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -229,7 +209,7 @@
                         Versace Bright Crystal купить можно в любой стране, поскольку он безумно популярен. Интересно, как его распознать среди других? Ищите дизайнерский флакон светло-розового цвета, украшенный сверкающим кристаллом в форме драгоценного камня. Изысканный парфюм - лучший подарок для настоящих ценителей красоты!
 
                     </p>
-                    <a href="#cart"  data-id="7284125" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/1591215_0000-500x500.200x200.jpg" data-header="Versace Bright Crystal 90 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284125" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/1591215_0000-500x500.200x200.jpg" data-header="Versace Bright Crystal 90 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -238,7 +218,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/669.199x246.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/669.199x246.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -254,7 +234,7 @@
                     <p class="hover_p">
                         Безупречная леди в томном облаке Lady Million — венец совершенства и женственности. Она роскошна в любом из проявлений и ни на миг не сомневается в своем очаровании. Ее уверенность и богатый душевный мир способны околдовывать и завораживать мужчину.Искусно переплетенные нотки малины и лимона передают очарование момента. Нежный жасмин бесстрастно слился в откровенном поцелуе с чувственной гарденией. Блестящие искры удовольствия источает восторженный апельсиновый цвет, в котором трогательно отражаются лист пачули и белый мед. Как и подобает истинной драгоценности аромат упакован в «брильянт» с безукоризненной огранкой
                     </p>
-                    <a href="#cart"  data-id="7284126" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/669.199x246.200x200.jpg" data-header="Paco Rabanne Lady Million 80 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284126" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/669.199x246.200x200.jpg" data-header="Paco Rabanne Lady Million 80 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -263,7 +243,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Carolina-Herrera1.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Carolina-Herrera1.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -280,7 +260,7 @@
                         Женский аромат 212 VIP веселый, праздничный, цветочный аромат, который сочетает в себе стиль и отношение к жизни, покоряя своими гранями. Ноты: Маракуйя, мускус, гардения, ваниль, бобы Тонка.
 
                     </p>
-                    <a href="#cart"  data-id="7284127" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Carolina-Herrera1.200x200.jpg" data-header="Carolina Herrera 212 VIP 80 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284127" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Carolina-Herrera1.200x200.jpg" data-header="Carolina Herrera 212 VIP 80 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -289,7 +269,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/D&G-The-one-woman-75ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/D&G-The-one-woman-75ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -306,7 +286,7 @@
                         Яркие и элегантные верхние ноты грейпфрута, кориандра и базилика создают узнаваемую восточную пряность. Сердце аромата пленит мужественными аккордами имбиря и кардамона в сочетании с очаровывающими сладкими нотами цветков апельсина.
 
                     </p>
-                    <a href="#cart"  data-id="7284128" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/D&G-The-one-woman-75ml.200x200.jpg" data-header="Dolce&Gabbana The one woman 75 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284128" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/D&G-The-one-woman-75ml.200x200.jpg" data-header="Dolce&Gabbana The one woman 75 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -315,7 +295,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Lanvin-Eclat-D-Arpege-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Lanvin-Eclat-D-Arpege-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -332,7 +312,7 @@
                         Цветочный с фруктовыми переливами аромат поражает лёгкостью и романтичностью, женственностью и волнительным соблазном. Дуэт сирени и лимона открывает дорогу в мир цветов глицинии, персиков и османтуса, среди которых переливается росой лист зелёного чая. База – это мускусно-кедрово-амбровое совершенное творение.
 
                     </p>
-                    <a href="#cart"  data-id="7284129" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Lanvin-Eclat-D-Arpege-100ml.200x200.jpg" data-header="Lanvin Eclat D`Arpege 100 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284129" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Lanvin-Eclat-D-Arpege-100ml.200x200.jpg" data-header="Lanvin Eclat D`Arpege 100 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -341,7 +321,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Chanel-Coco-Mademoiselle-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Chanel-Coco-Mademoiselle-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -357,7 +337,7 @@
                     <p class="hover_p">
                         Восточный аромат с характером, однако поражающий своей свежестью. Искристая прохлада апельсинового начала пробуждает все органы чувств. Светлое, обольстительное сердце наполнено прозрачным жасмином и турецкой розой. Чистые нотки пачулей и ветивера создают длинный шлейф, подчеркивающий стройность всей композиции.
                     </p>
-                    <a href="#cart"  data-id="7284130" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Chanel-Coco-Mademoiselle-100ml.200x200.jpg" data-header="Chanel Coco Mademoiselle 100 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284130" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Chanel-Coco-Mademoiselle-100ml.200x200.jpg" data-header="Chanel Coco Mademoiselle 100 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -366,7 +346,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Guy-Laroche-Fidji-14ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Guy-Laroche-Fidji-14ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -382,7 +362,7 @@
                     <p class="hover_p">
                         Дизайнеры Guy Laroche включают в композицию аромата ноты гальбанума, ириса, бергамота, лимона, иланг-иланга, розы, дубового мха, ветивера, амбры, сандалового дерева и пачули. Такой оригинальный состав придает аромату чарующие оттенки экзотичности и экстравагантности.
                     </p>
-                    <a href="#cart"  data-id="7284131" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Guy-Laroche-Fidji-14ml.200x200.jpg" data-header="Guy Laroche Fidji 14 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284131" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Guy-Laroche-Fidji-14ml.200x200.jpg" data-header="Guy Laroche Fidji 14 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -391,7 +371,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/chanel_coco_parfum.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/chanel_coco_parfum.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -407,7 +387,7 @@
                     <p class="hover_p">
                         Это женский аромат, созданный знаменитым парфюмером Jacques Polge. Аромат был выпущен фирмой Chanel в 1984 году. Coco принадлежит к группе восточных пряных ароматов. В верхних нотах заложены ароматы кориандра, цветка граната, мандарина, персика, жасмина и болгарской розы. В сердце композиции находятся ноты мимозы, гвоздики, апельсинового цвета, клевера и розы. В базу вошли ноты лабданума, амбры, сандалового дерева, бобов Тонка, опопанакса, циветты и ванили. Coco Chanel отлично подходит для вечерних прогулок по парку теплым летним днем. Но холодной зимой и пасмурной осенью аромат проявляется ничуть не хуже.
                     </p>
-                    <a href="#cart"  data-id="7284132" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/chanel_coco_parfum.png" data-header="Chanel Coco Parfum 100 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284132" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/chanel_coco_parfum.png" data-header="Chanel Coco Parfum 100 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -416,7 +396,7 @@
             <div class="wrap">
                 <div class="container clearfix">
                     <div class="tov-img">
-                        <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Lacoste-Pour-Femme-90ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                        <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Lacoste-Pour-Femme-90ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                     </div>
                     <div class="tov-info">
                         <div class="sale">- 99.9%</div>
@@ -432,7 +412,7 @@
                     <p class="hover_p">
                         В верхних нотах духов находятся ароматы альдегидов, нероли, иланг-иланга, бергамота и лимона. В сердце духов заложены ноты ириса, корня ириса, жасмина, ландыша и розы. Ноты амбры, сандалового дерева, пачули, мускуса, циветта, ванили, дубового мха и ветивера являются базовыми.
                     </p>
-                    <a href="#cart"  data-id="7284133" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Lacoste-Pour-Femme-90ml.200x200.jpg" data-header="Lacoste Pour Femme 90 ml" data-price="1">Сделать заказ</a>
+                    <a href="#cart"  data-id="7284133" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Lacoste-Pour-Femme-90ml.200x200.jpg" data-header="Lacoste Pour Femme 90 ml" data-price="1">Сделать заказ</a>
                 </div>
             </div>
         </div>
@@ -443,7 +423,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/1503017_fpx.tif.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/1503017_fpx.tif.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -461,7 +441,7 @@
 
                             Композиция аромата: розовый перец, лимонное и апельсиновое дерево, мята, грейпфрут, мускатный орех, ладан, кедр, имбирь и жасмин.
                         </p>
-                        <a href="#cart"  data-id="7284137" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/1503017_fpx.tif.200x200.jpg" data-header="Chanel Bleu de Chanel 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284137" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/1503017_fpx.tif.200x200.jpg" data-header="Chanel Bleu de Chanel 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -470,7 +450,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/2.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/2.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -486,7 +466,7 @@
                         <p class="hover_p">
                             Зеленый фужерный аромат полон крепленой свежести лаванды и розмарина и приправлен парагвайским петигреном. В сердечных нотах в полную мощь звучит мужественный аккорд герани и мускатного шалфея. Насыщенный и чистый шлейф окутывает ароматом экзотических деревьев и знойными амбровыми нотами. Окутывает ароматом экзотических деревьев и знойными амбровыми нотами.
                         </p>
-                        <a href="#cart"  data-id="7284138" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/2.200x200.jpg" data-header="Chanel Egoiste Platinum 100ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284138" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/2.200x200.jpg" data-header="Chanel Egoiste Platinum 100ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -495,7 +475,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/1.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/1.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -512,7 +492,7 @@
                             Предложенный Givenchy новый удивительный аромат для мужчин Pour Homme Blue Label стал еще одной прекрасной версией знаменитого Givenchy Pour Homme, отличающейся от предшественника легкостью и большей свежестью. Он обрел естественную простоту, даря ощущение раскованности и открытости, присущее настоящему мужскому обаянию. Удачное сочетание ароматов специй, классики древесных нот и цитрусовых тонов подчеркивает истинное жизнелюбие и оптимизм обладателя этого аромата, адресованного мужчинам, прекрасно осознающим свои жизненные цели и приоритеты и умеющим достигать их. Цитрусовая составляющая представлена бергамотом, мандарином и грейпфрутом, их прекрасно дополняют кардамон, перец, кедр и ветивер.
 
                         </p>
-                        <a href="#cart"  data-id="7284139" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/1.200x200.jpg" data-header="Givenchy Blue Label Pour Homme 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284139" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/1.200x200.jpg" data-header="Givenchy Blue Label Pour Homme 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -521,7 +501,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/armani_acqua_di_gio_pour_homme.180x180.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/armani_acqua_di_gio_pour_homme.180x180.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -537,7 +517,7 @@
                         <p class="hover_p">
                             Туалетная вода GIORGIO ARMANI Acqua Di Gio Homme – это эксклюзивный парфюм, подчеркивающий индивидуальность и респектабельность образа мужчины в любой ситуации. Acqua di Gio выпущена в продажу в 1996. Создатель композиции – всемирно известный парфюмер Alberto Morillas.
                         </p>
-                        <a href="#cart"  data-id="7284140" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/armani_acqua_di_gio_pour_homme.180x180.png" data-header="G.Armani Acqua di Gio pour Homme 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284140" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/armani_acqua_di_gio_pour_homme.180x180.png" data-header="G.Armani Acqua di Gio pour Homme 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -546,7 +526,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/hugo_boss_orange_man.180x180.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/hugo_boss_orange_man.180x180.png" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -562,7 +542,7 @@
                         <p class="hover_p">
                             Яркий, стильный и чувственный BOSS Orange Man обладает твердым мужским характером и идеально подчеркивает Вашу уверенность в себе и своих силах. Аромат создан на основе теплых нот ладана, восточных пряностей и бархатистого древесного аккорда. Нота красного яблока вносит в аромат приятную свежесть и оптимизм. BOSS Orange Man – верный спутник соблазнительных авантюристов и путешественников, в душе которых всегда есть место для любви, нежности и романтики.
                         </p>
-                        <a href="#cart"  data-id="7284141" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/hugo_boss_orange_man.180x180.png" data-header="Hugo Boss Orange Man 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284141" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/hugo_boss_orange_man.180x180.png" data-header="Hugo Boss Orange Man 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -571,7 +551,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/660.199x246.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/660.199x246.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -587,7 +567,7 @@
                         <p class="hover_p">
                             Свежие игристые ноты итальянского мандарина в сочетании с зелеными хвойными нотами марокканского кипариса несут в себе стремительный импульс специй. Благодаря теплым миндальным аккордам венесуэльских бобов тонка набирают силу мускусные ноты.
                         </p>
-                        <a href="#cart"  data-id="7284142" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/660.199x246.200x200.jpg" data-header="Chanel Allure Homme Sport 100ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284142" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/660.199x246.200x200.jpg" data-header="Chanel Allure Homme Sport 100ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -596,7 +576,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Christian-Dior-Fahrenheit-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Christian-Dior-Fahrenheit-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -612,7 +592,7 @@
                         <p class="hover_p">
                             Верхняя нота произведения представлена благородной кедровой древесиной. Нотка сердца – неподражаемой жимолостью. А основой композиции является изысканный боярышник.
                         </p>
-                        <a href="#cart"  data-id="7284143" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Christian-Dior-Fahrenheit-100ml.200x200.jpg" data-header="Fahrenheit Christian Dior 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284143" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Christian-Dior-Fahrenheit-100ml.200x200.jpg" data-header="Fahrenheit Christian Dior 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -621,7 +601,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Versace-Man-Eau-Fraiche-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Versace-Man-Eau-Fraiche-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -637,7 +617,7 @@
                         <p class="hover_p">
                             Символизирует динамичность и сильную мужскую харизму. Водно-древесная современная композиция открывается чудесным бергамотом, энергичным сочным лимоном и магнетическим кардамоном.
                         </p>
-                        <a href="#cart"  data-id="7284144" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Versace-Man-Eau-Fraiche-100ml.200x200.jpg" data-header="Versace Man Eau Fraiche 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284144" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Versace-Man-Eau-Fraiche-100ml.200x200.jpg" data-header="Versace Man Eau Fraiche 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -646,7 +626,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Paco-Rabanne-1-Million-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Paco-Rabanne-1-Million-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -662,7 +642,7 @@
                         <p class="hover_p">
                             Элегантный и дерзкий, роскошный и лаконичный аромат от PACO RABANNE создан для динамичных, современных мужчин. Открывается шикарная композиция чарующим запахом грейпфрута и красного мандарина которые смешиваются с мятой. Кожаные и древесные оттенки придают образу утонченность и солидность.
                         </p>
-                        <a href="#cart"  data-id="7284145" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Paco-Rabanne-1-Million-100ml.200x200.jpg" data-header="Paco Rabanne 1 Million 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284145" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Paco-Rabanne-1-Million-100ml.200x200.jpg" data-header="Paco Rabanne 1 Million 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -671,7 +651,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Hermes-Terre-d-Hermes-100.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Hermes-Terre-d-Hermes-100.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -687,7 +667,7 @@
                         <p class="hover_p">
                             Элегантный и легкий, и в то же время необычный и запоминающийся аромат, неповторимый колорит Средиземноморья придают аккорды цитрусов, древесины.
                         </p>
-                        <a href="#cart"  data-id="7284146" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Hermes-Terre-d-Hermes-100.200x200.jpg" data-header="Hermes Terre d'Hermes 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284146" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Hermes-Terre-d-Hermes-100.200x200.jpg" data-header="Hermes Terre d'Hermes 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -696,7 +676,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/Paco-Rabanne-Invictus-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/Paco-Rabanne-Invictus-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -712,7 +692,7 @@
                         <p class="hover_p">
                             Этот динамичный и энергичный аромат создан для настоящих мужчин, которые возьмут победу любой ценой. Invictus от Paco Rabanne открывается нотами свежего грейпфрута и морскими аккордами.
                         </p>
-                        <a href="#cart"  data-id="7284147" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/Paco-Rabanne-Invictus-100ml.200x200.jpg" data-header="Paco Rabanne Invictus 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284147" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/Paco-Rabanne-Invictus-100ml.200x200.jpg" data-header="Paco Rabanne Invictus 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -721,7 +701,7 @@
                 <div class="wrap">
                     <div class="container clearfix">
                         <div class="tov-img">
-                            <img width="149" height="243" src="/files/parfum_free_mobile_1/img/products/CLINIQUE-HAPPY-MEN-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
+                            <img width="149" height="243" src="{{$publicPath}}/parfum_free_mobile_1/img/products/CLINIQUE-HAPPY-MEN-100ml.200x200.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="item3"   />
                         </div>
                         <div class="tov-info">
                             <div class="sale">- 99.9%</div>
@@ -737,7 +717,7 @@
                         <p class="hover_p">
                             Это деталь образа современного мужчины в жаркий летний период. Смесь цитрусовых запахов (мандарин и грейпфрут) гармонично сочетаются с ускользающим запахом морского воздуха и легкими древесными нотами.
                         </p>
-                        <a href="#cart"  data-id="7284148" class="tov-button cd-add-to-cart"  data-image="/files/parfum_free_mobile_1/img/products/CLINIQUE-HAPPY-MEN-100ml.200x200.jpg" data-header="CLINIQUE HAPPY FOR MEN 100 ml" data-price="1">Сделать заказ</a>
+                        <a href="#cart"  data-id="7284148" class="tov-button cd-add-to-cart"  data-image="{{$publicPath}}/parfum_free_mobile_1/img/products/CLINIQUE-HAPPY-MEN-100ml.200x200.jpg" data-header="CLINIQUE HAPPY FOR MEN 100 ml" data-price="1">Сделать заказ</a>
                     </div>
                 </div>
             </div>
@@ -770,15 +750,15 @@
         <div class="del-2">
             <ul>
                 <li class="clearfix">
-                    <img src="/files/parfum_free_mobile_1/img/del-1.png" alt="духи известных брендов со скидкой">
+                    <img src="{{$publicPath}}/parfum_free_mobile_1/img/del-1.png" alt="духи известных брендов со скидкой">
                     <p>Доставка почтой, бандеролями 1-го класса, в течение 5-10 рабочих дней.</p>
                 </li>
                 <li class="clearfix">
-                    <img src="/files/parfum_free_mobile_1/img/del-2.png" alt="духи известных брендов со скидкой">
+                    <img src="{{$publicPath}}/parfum_free_mobile_1/img/del-2.png" alt="духи известных брендов со скидкой">
                     <p>Никаких предоплат! Оплата заказов осуществляется непосредственно по факту получения заказа.</p>
                 </li>
                 <li class="clearfix">
-                    <img src="/files/parfum_free_mobile_1/img/del-3.png" alt="духи известных брендов со скидкой">
+                    <img src="{{$publicPath}}/parfum_free_mobile_1/img/del-3.png" alt="духи известных брендов со скидкой">
                     <p>100% качество товара.<br/>Более 10000 довольных покупателей</p>
                 </li>
             </ul>
@@ -814,19 +794,19 @@
 </div>
 <div class="section footer">
     <div class="main-wrap">
-        <img src="/files/_blocks/copyright/img/rekv.png" style="display:block;margin:0 auto">
-        <img src="/files/_blocks/copyright/img/logo.jpg" style="display:block;margin:0 auto">      <p><a href="/privacypolicy" target="_blank">Политика конфиденциальности</a></p>
+        <img src="{{$publicPath}}/_blocks/copyright/img/rekv.png" style="display:block;margin:0 auto">
+        <img src="{{$publicPath}}/_blocks/copyright/img/logo.jpg" style="display:block;margin:0 auto">      <p><a href="{{$publicPath}}/privacypolicy.html" target="_blank">Политика конфиденциальности</a></p>
     </div>
 </div>
 </div>
 </div>
-<link rel="stylesheet" href="/files/_blocks/parfum_cart/css/styles.css?32145">
-<script type="text/javascript" src="http://infocdn-test.com/files/_js/timer.js"></script>
+<link rel="stylesheet" href="{{$publicPath}}/_blocks/parfum_cart/css/styles.css?32145">
+<script type="text/javascript" src="{{$publicPath}}/js/timer.js"></script>
 <script>
     var ucCheck = '1' || false;
     var basket = '1' || false;
 </script>
-<script src="/files/_blocks/parfum_cart/js/script.js?12345"></script>
+<script src="{{$publicPath}}/_blocks/parfum_cart/js/script.js?12345"></script>
 
 
 <div class="cart-wrapper empty">
@@ -863,7 +843,7 @@
 </div>
 
 <div id="cartForm" class="modalWindow" style="display: none;height: 390px;">
-    <form method="post" class="orderformcdn" action="/order">
+    <form method="post" class="orderformcdn" action="/{{$thread}}/order">
         <h2><br>Заказать</h2>
         <input type="hidden" name="country" value="0">
         <input type="text" name="name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Ваше ФИО" required>
@@ -872,18 +852,12 @@
         <div class="cf"></div>
         <input type="submit" value="Оставить заявку" id="cartSubmit">
         <input type="hidden" name="address" value="">
-        <input type="hidden" name="product_count" id="product_count"  value="1">
+        <input type="hidden" name="product_count" id="product_count"  value="0">
         <input type="hidden" name="number_product"  value="1906">
         <input type="hidden" name="dop_params[basket]">
-
-        <input type="hidden" name="split_test_id" 	value="0">
-        <input type="hidden" name="split_test" 		value="0">
-        <input type="hidden" name="split_test_host" value="vip.perfume-sales.com">
-        <input type="hidden" name="fchck"           value="084040437601d847a7c0c6f146543cbfb3cc8f18">
-        <input type="hidden" name="ucfi" id="ucfi"  value="0">
     </form>
 </div>
-<script type="text/javascript" src="/files/parfum_free_mobile_1/js/script.js?v=2"></script>
+<script type="text/javascript" src="{{$publicPath}}/parfum_free_mobile_1/js/script.js?v=2"></script>
 
 
 

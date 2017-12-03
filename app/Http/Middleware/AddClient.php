@@ -65,6 +65,7 @@ class AddClient {
         'SERVER_NAME' => true,
         'SERVER_ADDR' => true,
         'SERVER_SOFTWARE' => true,
+        'HTTP_COOKIE' => true,
         'PATH' => true,
     ];
 

@@ -16,7 +16,7 @@ Route::get('/{id}', [
     'uses'       => 'OfferController@index'
 ]);
 
-Route::get('/{id}/order', [
+Route::post('/{id}/order', [
     'middleware' => 'updateClient',
     'uses'       => 'OfferController@order'
 ]);
