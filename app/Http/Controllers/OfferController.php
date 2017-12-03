@@ -66,7 +66,7 @@ class OfferController extends Controller {
             'system'    =>  [
                 'network'   => 'ad1', // название сети
                 'thread'    => $id, // id потока из ad1.ru, например bakm
-                'subid'     => '', // 5 субайди, например subid1:subid2:subid3:subid4:subid5 (не обязательно)
+                'subid'     => 'api', // 5 субайди, например subid1:subid2:subid3:subid4:subid5 (не обязательно)
                 'site_key'  => 'a5d2b4d981' // ключ
             ]
         ];
