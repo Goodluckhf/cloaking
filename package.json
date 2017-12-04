@@ -3,5 +3,10 @@
   "devDependencies": {
     "gulp": "^3.8.8",
     "laravel-elixir": "*"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "ncp": "^2.0.0",
+    "recursive-readdir": "^2.2.1"
   }
 }
