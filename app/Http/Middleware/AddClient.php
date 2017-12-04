@@ -19,12 +19,13 @@ class AddClient {
 	    if (! $offer ) {
             return $next($request);
         }
+        
 
         //Проверяем заходил ли он уже на этот лэндинг
         $cookieClientId = $request->cookie('client');
 
 	    if (! $cookieClientId) {
-            $this->addNewClient($request, $offer->id);
+            $this->addNewClient($request, $offer->id, $offer->is_moder);
             return $next($request);
         }
 
@@ -34,7 +35,7 @@ class AddClient {
             ->first();
 
         if (! $client) {
-            $this->addNewClient($request, $offer->id);
+            $this->addNewClient($request, $offer->id, $offer->is_moder);
             return $next($request);
         }
 
@@ -43,12 +44,13 @@ class AddClient {
 		return $next($request);
 	}
 
-	private function addNewClient($request, $offerId) {
+	private function addNewClient($request, $offerId, $is_moder) {
         $newClient = new \App\Client;
         $newClient->is_proxy = $this->isProxy($request);
         $newClient->ip = $this->getRealIp($request);
         $newClient->data = json_encode($this->getHeadersInfo($request));
         $newClient->offer_id = $offerId;
+        $newClient->is_moder = !$is_moder;
         $newClient->save();
         Cookie::queue('client', $newClient->id, 60);
     }
