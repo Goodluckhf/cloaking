@@ -37,7 +37,7 @@ const landDir = './__land';
 		process.exit(0);
 	};
 
-/*	try {
+	try {
 		await fs.mkdirAsync(landDir);
 	} catch (err) {
 		onError('err: ', err);
@@ -49,15 +49,14 @@ const landDir = './__land';
 		await exec(`wget -P ${landDir} -Hpr "${url}"`);
 	} catch (err) {
 		onError("ERROR: " + error);
-	}*/
+	}
 		
 	console.log('ok! Files has been downloaded');
 
 	const reg = /\?.*/i;
 
-/*	const getFilesForRename = async () => {
+	const getFilesForRename = async () => {
 		const landFiles = await recursiveReadAsync(landDir);
-		console.log('landFiles', landFiles);
 		return landFiles.reduce((arr, file) => {
 			if (reg.test(file)) {
 				arr.push(file);
@@ -68,7 +67,7 @@ const landDir = './__land';
 	};
 
 	const filesForRename = await getFilesForRename();
-	console.log("переименовываем файлы ", filesForRename);
+	console.log("переименовываем файлы ");
 
 	try {
 		await Promise.all(filesForRename.map(file => {
@@ -118,12 +117,12 @@ const landDir = './__land';
 		}));
 	} catch(err) {
 		onError(err);
-	}*/
+	}
 
 	console.log('копируем файлы в public');
 	const destLandDir = `./public/landing/${landingName}`;
 
-	/*try {
+	try {
 		await fs.mkdirAsync(destLandDir);
 		await Promise.all([
 			ncp(`${landDir}/img/`, `${destLandDir}/img/`),
@@ -134,26 +133,68 @@ const landDir = './__land';
 		]);
 	} catch (err) {
 		onError(err);
-	}*/
+	}
 	
 	const readAndReplace = async (file, regHashes) => {
 		let text = await fs.readFileAsync(file, 'utf-8');
-		const changedText = regHashes.reduce((text, hash) => {
-			return text.replace(hash.reg, hash.replaceTo);
+		const changedText = regHashes.reduce((textToChange, hash) => {
+			return textToChange.replace(hash.reg, hash.replaceTo);
 		}, text);
 		return fs.writeFileAsync(file, changedText, 'utf-8');
 	};
 	
-	console.log("исправляем пути....");
+	console.log("исправляем пути.... index.html");
 	try {
-		//await fs.unlinkAsync(`${destLandDir}/js/unload_submit.js`);
+		await fs.unlinkAsync(`${destLandDir}/js/unload_submit.js`);
 		await readAndReplace(`${destLandDir}/index.html`, [{
+				//Удаляем ненужный файл
 				reg: /<script.*src=".*unload_submit\.js.*">.*<\/script>/,
 				replaceTo: ""
+			}, { 
+				//заменяем внешние ссылки
+				reg: /(href|src)="https?:\/\/[\w\-]+\.[a-z]{2,}\//gi,
+				replaceTo: '$1="/'
 			}, {
-				reg: /=".*\.(png)|(jpg)|(jpeg)|(bmp)"$/,
-				replaceTo: ""
-			}		
+				//заменяем пути для картинок
+				reg: /(src|href)="\/?.*\/([0-9@a-z_\-]+\.(jpg|png|bmp))"/gi,
+				replaceTo: '$1="{{$publicPath}}/img/$2"'
+			}, {
+				//заменяем пути для js
+				reg: /src="\/?.*\/([0-9a-z_.\-]+\.js)(\?[0-9]+)?"/gi,
+				replaceTo: 'src="{{$publicPath}}/js/$1"'
+			}, {
+				//заменяем пути для css
+				reg: /href="\/?.*\/([0-9a-z._\-]+\.css)(\?[0-9]+)?"/gi,
+				replaceTo: 'href="{{$publicPath}}/css/$1"'
+			}, {
+				//заменяем мета тег og:url
+				reg: /"og:url"\scontent="https?:\/\/[\w\-]+\.[a-z]{2,}\/?/i,
+				replaceTo: '"og:url" content="http://{{$host}}/{{$thread}}'
+			}, {
+				//заменяем мета тег og:image 1. удаляем домен
+				reg: /"og:image"\scontent="https?:\/\/[\w\-]+\.[a-z]{2,}/i,
+				replaceTo: '"og:image" content="'
+			}, {
+				//заменяем мета тег og:image 2. меняем путь
+				reg: /"og:image"\scontent="\/?.*\/([0-9a-z_\-]+\.(jpg|png|bmp))"/i,
+				replaceTo: '"og:image" content="{{$publicPath}}/img/$1"'
+			}, {
+				//заменяем путь для privacypolicy
+				reg: /href="\/?privacypolicy"/i,
+				replaceTo: 'href="{{$publicPath}}/privacypolicy.html"'
+			}, {
+				//Удаляем яндекс метрику
+				reg: /\<\!--\{--\>.*\<\!--\}--\>/i,
+				replaceTo: ''
+			}, {
+				//Меняем action у формы
+				reg: /action="\/?order"/i,
+				replaceTo: 'action="/{{$thread}}/order"'
+			}, {
+				//Удаляем левые скрипты
+				//reg: /<script.*src="/1402036"></script>/gi,
+				//replaceTo: 'action="/{{$thread}}/order"'
+			}
 		]);
 	} catch (err) {
 		onError(err);
