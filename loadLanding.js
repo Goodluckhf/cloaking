@@ -37,7 +37,7 @@ const landDir = './__land';
 		process.exit(0);
 	};
 
-	try {
+/*	try {
 		await fs.mkdirAsync(landDir);
 	} catch (err) {
 		onError('err: ', err);
@@ -49,13 +49,13 @@ const landDir = './__land';
 		await exec(`wget -P ${landDir} -Hpr "${url}"`);
 	} catch (err) {
 		onError("ERROR: " + error);
-	}
+	}*/
 		
 	console.log('ok! Files has been downloaded');
 
 	const reg = /\?.*/i;
 
-	const getFilesForRename = async () => {
+/*	const getFilesForRename = async () => {
 		const landFiles = await recursiveReadAsync(landDir);
 		console.log('landFiles', landFiles);
 		return landFiles.reduce((arr, file) => {
@@ -118,23 +118,47 @@ const landDir = './__land';
 		}));
 	} catch(err) {
 		onError(err);
-	}
+	}*/
 
 	console.log('копируем файлы в public');
 	const destLandDir = `./public/landing/${landingName}`;
 
-	try {
+	/*try {
 		await fs.mkdirAsync(destLandDir);
 		await Promise.all([
 			ncp(`${landDir}/img/`, `${destLandDir}/img/`),
-			ncp(`${landDir}/index.html`, destLandDir),
-			ncp(`${landDir}/privacypolicy.html`, destLandDir),
+			ncp(`${landDir}/index.html`, `${destLandDir}/index.html`),
+			ncp(`${landDir}/privacypolicy.html`, `${destLandDir}/privacypolicy.html`),
 			ncp(`${landDir}/css/`, `${destLandDir}/css/`),
 			ncp(`${landDir}/js/`, `${destLandDir}/js/`),
 		]);
 	} catch (err) {
 		onError(err);
+	}*/
+	
+	const readAndReplace = async (file, regHashes) => {
+		let text = await fs.readFileAsync(file, 'utf-8');
+		const changedText = regHashes.reduce((text, hash) => {
+			return text.replace(hash.reg, hash.replaceTo);
+		}, text);
+		return fs.writeFileAsync(file, changedText, 'utf-8');
+	};
+	
+	console.log("исправляем пути....");
+	try {
+		//await fs.unlinkAsync(`${destLandDir}/js/unload_submit.js`);
+		await readAndReplace(`${destLandDir}/index.html`, [{
+				reg: /<script.*src=".*unload_submit\.js.*">.*<\/script>/,
+				replaceTo: ""
+			}, {
+				reg: /=".*\.(png)|(jpg)|(jpeg)|(bmp)"$/,
+				replaceTo: ""
+			}		
+		]);
+	} catch (err) {
+		onError(err);
 	}
+	
 
 	console.log('result>>>>:  ');
 })();

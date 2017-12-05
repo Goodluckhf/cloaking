@@ -71,8 +71,6 @@
     var formIsSubmitted = false;
 </script>
 
-<script type="text/javascript" src="{{$publicPath}}/_blocks/notificators/unload_submit.js?6"></script>
-
 <script>
     try {
         var geoKey = 271;
