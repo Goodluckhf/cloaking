@@ -26,7 +26,9 @@ const url         = process.argv[3];
 
 console.log('url', url);
 //process.exit(0);
-const landDir = './__land';
+const landDirAbs = '__land';
+const landDir = `./${landDirAbs}`;
+
 (async () => {
 	const removeLandDir = async () => {
 		return await rimraf(landDir);
@@ -84,8 +86,67 @@ const landDir = './__land';
 	}));
 
 	const landFiles = await recursiveReadAsync(landDir);
+	const dirNames = landFiles.reduce((obj, filePath) => {
+		if (! /(?:(?:index\.html|privacypolicy)|\.(?:css|js|jpg|jpeg|png|bmp))/i.test(filePath)) {
+			return obj;
+		}
+		const reg = new RegExp(`${landDirAbs}/([^/]+)/.*`, 'i');
+		obj[filePath.replace(reg, "$1")] = true;
+		return obj;
+	}, {});
 
-	console.log('копируем файлы в каркас');
+	try {
+		const destLandDir = `./public/landing/${landingName}/`;
+		await fs.mkdirAsync(destLandDir);
+		await Promise.each(Object.keys(dirNames).map(dir => {
+			const fromPath = `${landDir}/${dir}/`;
+			console.log(fromPath, destLandDir);
+			return ncp(fromPath, destLandDir, {clobber: false});
+		}), () => Promise.resolve());
+		console.log(dirNames);
+		
+	} catch (err) {
+		onError(err);
+	}
+process.exit(0);
+	
+	try {
+		
+
+		//await ncp(, destLandDir);
+		await ncp(`__land/infocdn-test.com`, destLandDir);
+		process.exit(0);
+
+		await Promise.all(landFiles.map(filePath => {
+			if (! /(?:(?:index\.html|privacypolicy)|\.(?:css|js|jpg|jpeg|png|bmp))/i.test(filePath)) {
+				return Promise.resolve();
+			}
+
+			if (/index\.html/i.test(filePath)) {
+				return ncp(filePath, `${destLandDir}/index.html`);
+			}
+
+			if (/privacypolicy/i.test(filePath)) {
+				return ncp(filePath, `${destLandDir}/privacypolicy.html`);
+			}
+
+
+			/*const reg = new RegExp(`${landDirAbs}\/[^/]+\/`, 'i');
+			const newFilePath = filePath.replace(reg, `${destLandDir}/`);
+
+			const reg = new RegExp(`${landDirAbs}\/[^/]+\/`, 'i');
+			const fromPath*/
+
+			console.log(newFilePath);
+			return ncp(filePath, newFilePath);
+		}));
+		await ncp();
+	} catch (err) {
+		onError(err);
+	}
+
+	//console.log('копируем файлы в каркас', landFiles);
+	process.exit();
 	try {
 		await Promise.all(landFiles.map(file => {
 			const fileName = file.replace(/.*\//, '');
@@ -121,10 +182,10 @@ const landDir = './__land';
 	}
 
 	console.log('копируем файлы в public');
-	const destLandDir = `./public/landing/${landingName}`;
+	//const destLandDir = `./public/landing/${landingName}`;
 
 	try {
-		await fs.mkdirAsync(destLandDir);
+		
 		await Promise.all([
 			ncp(`${landDir}/img/`, `${destLandDir}/img/`),
 			ncp(`${landDir}/index.html`, `${destLandDir}/index.html`),
