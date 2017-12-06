@@ -2,8 +2,9 @@
 const Promise            = require('bluebird');
 const exec               = Promise.promisify(require('child_process').exec);
 const fs                 = Promise.promisifyAll(require('fs'));
+const rimraf             = Promise.promisify(require('rimraf'));
+const ncp                = Promise.promisify(require('ncp').ncp);
 const recursiveReadAsync = Promise.promisify(require('recursive-readdir'));
-const ncp = Promise.promisify(require('ncp').ncp);
 //собираем аргументы
 /*const args = process.argv
 	.slice(2)
@@ -28,12 +29,12 @@ console.log('url', url);
 const landDir = './__land';
 (async () => {
 	const removeLandDir = async () => {
-		return await fs.rmdirAsync(landDir);
+		return await rimraf(landDir);
 	};
 
 	const onError = async (err, message) => {
 		console.log(message, err);
-		//await removeLandDir();
+		await removeLandDir();
 		process.exit(0);
 	};
 
@@ -156,15 +157,15 @@ const landDir = './__land';
 				replaceTo: '$1="/'
 			}, {
 				//заменяем пути для картинок
-				reg: /(src|href)="\/?.*\/([0-9@a-z_\-]+\.(jpg|png|bmp))"/gi,
+				reg: /(src|href)="\/?.*\/([0-9@a-z_\-]+\.(?:jpg|png|bmp))"/gi,
 				replaceTo: '$1="{{$publicPath}}/img/$2"'
 			}, {
 				//заменяем пути для js
-				reg: /src="\/?.*\/([0-9a-z_.\-]+\.js)(\?[0-9]+)?"/gi,
+				reg: /src="\/?.*\/([0-9a-z_.\-]+\.js)(?:\?[0-9]+)?"/gi,
 				replaceTo: 'src="{{$publicPath}}/js/$1"'
 			}, {
 				//заменяем пути для css
-				reg: /href="\/?.*\/([0-9a-z._\-]+\.css)(\?[0-9]+)?"/gi,
+				reg: /href="\/?.*\/([0-9a-z._\-]+\.css)(?:\?[0-9]+)?"/gi,
 				replaceTo: 'href="{{$publicPath}}/css/$1"'
 			}, {
 				//заменяем мета тег og:url
@@ -176,7 +177,7 @@ const landDir = './__land';
 				replaceTo: '"og:image" content="'
 			}, {
 				//заменяем мета тег og:image 2. меняем путь
-				reg: /"og:image"\scontent="\/?.*\/([0-9a-z_\-]+\.(jpg|png|bmp))"/i,
+				reg: /"og:image"\scontent="\/?.*\/([0-9a-z_\-]+\.(?:jpg|png|bmp))"/i,
 				replaceTo: '"og:image" content="{{$publicPath}}/img/$1"'
 			}, {
 				//заменяем путь для privacypolicy
@@ -184,22 +185,54 @@ const landDir = './__land';
 				replaceTo: 'href="{{$publicPath}}/privacypolicy.html"'
 			}, {
 				//Удаляем яндекс метрику
-				reg: /\<\!--\{--\>.*\<\!--\}--\>/i,
+				reg: /<!--{-->[\s\S]*<!--}-->/gmi,
 				replaceTo: ''
 			}, {
 				//Меняем action у формы
 				reg: /action="\/?order"/i,
 				replaceTo: 'action="/{{$thread}}/order"'
-			}, {
-				//Удаляем левые скрипты
-				//reg: /<script.*src="/1402036"></script>/gi,
-				//replaceTo: 'action="/{{$thread}}/order"'
 			}
 		]);
 	} catch (err) {
 		onError(err);
 	}
 	
-
-	console.log('result>>>>:  ');
+	//удаляем лишние скрипты
+	let text = await fs.readFileAsync(`${destLandDir}/index.html`, 'utf-8');
+	const resReg = text.match(/(?:<link|<script).*(?:src|href)=".*".*>.*(?:<\/link>|<\/script>)/gi);
+	if (resReg) {
+		const itemsForRemove = resReg.reduce((arr, item) => {
+			if (/\.(?:js|css)/i.test(item)) {
+				return arr;
+			}
+			
+			arr.push(item);
+			return arr;
+		}, []);
+		
+		itemsForRemove.forEach(item => {
+			text = text.replace(item, '');
+		});
+		
+		await fs.writeFileAsync(`${destLandDir}/index.html`, text, 'utf-8');
+	}
+	
+	const viewsDir = `./resources/views/landings`;
+	try {
+		await fs.copyFileAsync(`${destLandDir}/index.html`, `${viewsDir}/${landingName}.blade.php`);
+		
+		console.log('убираем за собой...');
+		
+		await Promise.all([
+			removeLandDir(),
+			fs.unlinkAsync(`${destLandDir}/index.html`)
+		]);
+		
+		await readAndReplace(`${destLandDir}/privacypolicy.html`, [{
+			reg: /href="\/?.*\/([0-9a-z._\-]+\.css)(?:\?[0-9]+)?"/gi,
+			replaceTo: 'href="{{$publicPath}}/css/$1"'
+		}]);
+	} catch (err) {
+		onError(err);
+	}
 })();
