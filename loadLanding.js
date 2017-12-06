@@ -217,6 +217,21 @@ const landDir = './__land';
 		await fs.writeFileAsync(`${destLandDir}/index.html`, text, 'utf-8');
 	}
 	
+	try {
+		const jsFiles = await fs.readdirAsync(`${destLandDir}/js`);
+			
+		console.log('подменяем пути во всех js');
+		await Promise.all(jsFiles.map(file => {
+			return readAndReplace(`${destLandDir}/js/${file}`, [{
+				//картинки
+				reg: /(src|href)="\/?.*\/([0-9@a-z_\+\'\-\s.]+\.(?:jpg|png|bmp))"/gi,
+				replaceTo: `$1="/landing/${landingName}/img/$2"`
+			}]);
+		}));
+	} catch (err) {
+		onError(err);
+	}
+	
 	const viewsDir = `./resources/views/landings`;
 	try {
 		await fs.copyFileAsync(`${destLandDir}/index.html`, `${viewsDir}/${landingName}.blade.php`);
@@ -229,9 +244,11 @@ const landDir = './__land';
 		]);
 		
 		await readAndReplace(`${destLandDir}/privacypolicy.html`, [{
-			reg: /href="\/?.*\/([0-9a-z._\-]+\.css)(?:\?[0-9]+)?"/gi,
-			replaceTo: 'href="{{$publicPath}}/css/$1"'
+			reg: /(src|href)="\/?.*\/([0-9@a-z_\-]+\.(?:jpg|png|bmp))"/gi,
+			replaceTo: '$1="{{$publicPath}}/img/$2"'
 		}]);
+		
+		
 	} catch (err) {
 		onError(err);
 	}
