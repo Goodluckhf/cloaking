@@ -5,22 +5,7 @@ const fs                 = Promise.promisifyAll(require('fs'));
 const rimraf             = Promise.promisify(require('rimraf'));
 const ncp                = Promise.promisify(require('ncp').ncp);
 const recursiveReadAsync = Promise.promisify(require('recursive-readdir'));
-//собираем аргументы
-/*const args = process.argv
-	.slice(2)
-	.reduce((ob, arg) => {
-		const argKV = arg.split('=');
-		if (argKV.length === 2) {
-			ob[argKV[0]] = argKV[1];
-			return ob;
-		}
 
-		return ob;
-
-	}, {});*/
-
-//console.log('args: ', args);
-//console.log('args1 : ', process.argv);
 const landingName = process.argv[2];
 const url         = process.argv[3];
 
@@ -80,169 +65,68 @@ const landDir = `./${landDirAbs}`;
 		onError('переименовывание с ошибкой', err);
 	}
 
-	console.log('создаем каркас...');
-	await Promise.all(['img', 'js', 'css'].map(file => {
-		return fs.mkdirAsync(`${landDir}/${file}`);
-	}));
-
 	const landFiles = await recursiveReadAsync(landDir);
-	const dirNames = landFiles.reduce((obj, filePath) => {
+	const dirNames = landFiles.reduce((arr, filePath) => {
 		if (! /(?:(?:index\.html|privacypolicy)|\.(?:css|js|jpg|jpeg|png|bmp))/i.test(filePath)) {
-			return obj;
+			return arr;
 		}
-		const reg = new RegExp(`${landDirAbs}/([^/]+)/.*`, 'i');
-		obj[filePath.replace(reg, "$1")] = true;
-		return obj;
-	}, {});
-
-	try {
-		const destLandDir = `./public/landing/${landingName}/`;
-		await fs.mkdirAsync(destLandDir);
-		await Promise.each(Object.keys(dirNames).map(dir => {
-			const fromPath = `${landDir}/${dir}/`;
-			console.log(fromPath, destLandDir);
-			return ncp(fromPath, destLandDir, {clobber: false});
-		}), () => Promise.resolve());
-		console.log(dirNames);
 		
-	} catch (err) {
-		onError(err);
-	}
-process.exit(0);
+		arr.push(filePath);
+		return arr;
+	}, []);
 	
+	const destLandDir = `./public/landing/${landingName}/`;
+	console.log("копируем в public");
 	try {
+		await fs.mkdirAsync(destLandDir);
+		await Promise.each(dirNames, dir => {
+			const reg = new RegExp(`^(${landDirAbs}\/[^/]+).*`, 'i');
+			const fromPath = dir.replace(reg, "$1");
+			return ncp(fromPath, destLandDir, {clobber: false});
+		});
 		
-
-		//await ncp(, destLandDir);
-		await ncp(`__land/infocdn-test.com`, destLandDir);
-		process.exit(0);
-
-		await Promise.all(landFiles.map(filePath => {
-			if (! /(?:(?:index\.html|privacypolicy)|\.(?:css|js|jpg|jpeg|png|bmp))/i.test(filePath)) {
-				return Promise.resolve();
-			}
-
-			if (/index\.html/i.test(filePath)) {
-				return ncp(filePath, `${destLandDir}/index.html`);
-			}
-
-			if (/privacypolicy/i.test(filePath)) {
-				return ncp(filePath, `${destLandDir}/privacypolicy.html`);
-			}
-
-
-			/*const reg = new RegExp(`${landDirAbs}\/[^/]+\/`, 'i');
-			const newFilePath = filePath.replace(reg, `${destLandDir}/`);
-
-			const reg = new RegExp(`${landDirAbs}\/[^/]+\/`, 'i');
-			const fromPath*/
-
-			console.log(newFilePath);
-			return ncp(filePath, newFilePath);
-		}));
-		await ncp();
-	} catch (err) {
-		onError(err);
-	}
-
-	//console.log('копируем файлы в каркас', landFiles);
-	process.exit();
-	try {
-		await Promise.all(landFiles.map(file => {
-			const fileName = file.replace(/.*\//, '');
-			//копируем js
-			if(/.*\.js$/.test(fileName)) {
-				return fs.copyFileAsync(file, `${landDir}/js/${fileName}`);
-			}
-
-			//копируем css
-			if (/.*\.css$/.test(fileName)) {
-				return fs.copyFileAsync(file, `${landDir}/css/${fileName}`);
-			}
-
-			//копируем img
-			if (/.*\.(png)|(jpg)|(jpeg)|(bmp)$/.test(fileName)) {
-				return fs.copyFileAsync(file, `${landDir}/img/${fileName}`); 
-			}
-
-			//копируем index.html
-			if (fileName === "index.html") {
-				return fs.copyFileAsync(file, `${landDir}/${fileName}`); 
-			}
-
-			//копируем privacypolicy
-			if (fileName === 'privacypolicy') {
-				return fs.copyFileAsync(file, `${landDir}/${fileName}.html`);
-			}
-
-			return Promise.resolve();
-		}));
-	} catch(err) {
-		onError(err);
-	}
-
-	console.log('копируем файлы в public');
-	//const destLandDir = `./public/landing/${landingName}`;
-
-	try {
+		//заменяем privacypolicy
+		await fs.renameAsync(`${destLandDir}privacypolicy`, `${destLandDir}privacypolicy.html`);
 		
-		await Promise.all([
-			ncp(`${landDir}/img/`, `${destLandDir}/img/`),
-			ncp(`${landDir}/index.html`, `${destLandDir}/index.html`),
-			ncp(`${landDir}/privacypolicy.html`, `${destLandDir}/privacypolicy.html`),
-			ncp(`${landDir}/css/`, `${destLandDir}/css/`),
-			ncp(`${landDir}/js/`, `${destLandDir}/js/`),
-		]);
 	} catch (err) {
 		onError(err);
 	}
 	
 	const readAndReplace = async (file, regHashes) => {
 		let text = await fs.readFileAsync(file, 'utf-8');
+	
 		const changedText = regHashes.reduce((textToChange, hash) => {
 			return textToChange.replace(hash.reg, hash.replaceTo);
 		}, text);
+		
 		return fs.writeFileAsync(file, changedText, 'utf-8');
 	};
 	
 	console.log("исправляем пути.... index.html");
 	try {
-		await fs.unlinkAsync(`${destLandDir}/js/unload_submit.js`);
 		await readAndReplace(`${destLandDir}/index.html`, [{
 				//Удаляем ненужный файл
 				reg: /<script.*src=".*unload_submit\.js.*">.*<\/script>/,
 				replaceTo: ""
 			}, { 
 				//заменяем внешние ссылки
-				reg: /(href|src)="https?:\/\/[\w\-]+\.[a-z]{2,}\//gi,
-				replaceTo: '$1="/'
-			}, {
-				//заменяем пути для картинок
-				reg: /(src|href)="\/?.*\/([0-9@a-z_\-]+\.(?:jpg|png|bmp))"/gi,
-				replaceTo: '$1="{{$publicPath}}/img/$2"'
-			}, {
-				//заменяем пути для js
-				reg: /src="\/?.*\/([0-9a-z_.\-]+\.js)(?:\?[0-9]+)?"/gi,
-				replaceTo: 'src="{{$publicPath}}/js/$1"'
-			}, {
-				//заменяем пути для css
-				reg: /href="\/?.*\/([0-9a-z._\-]+\.css)(?:\?[0-9]+)?"/gi,
-				replaceTo: 'href="{{$publicPath}}/css/$1"'
+				reg: /(href|src)="(?:(?:https?:\/\/[\w\-]+\.[a-z]{2,})|(?:\/?([^/]+)))\//gi,
+				replaceTo: '$1="{{$publicPath}}/$2/'
+			}, { 
+				//фиксим нужные внешние скрипты (Google)
+				reg: /(href|src)=".*(https:\/\/fonts\.g.*\.com.*)"/gi,
+				replaceTo: '$1="$2"'
 			}, {
 				//заменяем мета тег og:url
-				reg: /"og:url"\scontent="https?:\/\/[\w\-]+\.[a-z]{2,}\/?/i,
+				reg: /"og:url"\scontent="https?:\/\/[^/]+\.[a-z]{2,}\/?/i,
 				replaceTo: '"og:url" content="http://{{$host}}/{{$thread}}'
 			}, {
 				//заменяем мета тег og:image 1. удаляем домен
-				reg: /"og:image"\scontent="https?:\/\/[\w\-]+\.[a-z]{2,}/i,
-				replaceTo: '"og:image" content="'
-			}, {
-				//заменяем мета тег og:image 2. меняем путь
-				reg: /"og:image"\scontent="\/?.*\/([0-9a-z_\-]+\.(?:jpg|png|bmp))"/i,
-				replaceTo: '"og:image" content="{{$publicPath}}/img/$1"'
+				reg: /"og:image"\scontent="(?:(?:https?:\/\/[\w\-]+\.[a-z]{2,})|(\/[^/]+\/))\//gi,
+				replaceTo: '"og:image" content="{{$publicPath}}/'
 			}, {
 				//заменяем путь для privacypolicy
-				reg: /href="\/?privacypolicy"/i,
+				reg: /href=".*privacypolicy"/i,
 				replaceTo: 'href="{{$publicPath}}/privacypolicy.html"'
 			}, {
 				//Удаляем яндекс метрику
@@ -250,7 +134,7 @@ process.exit(0);
 				replaceTo: ''
 			}, {
 				//Меняем action у формы
-				reg: /action="\/?order"/i,
+				reg: /action="\/?order"/ig,
 				replaceTo: 'action="/{{$thread}}/order"'
 			}
 		]);
@@ -279,16 +163,35 @@ process.exit(0);
 	}
 	
 	try {
-		const jsFiles = await fs.readdirAsync(`${destLandDir}/js`);
+		const newLandFiles = await recursiveReadAsync(destLandDir);
 			
 		console.log('подменяем пути во всех js');
-		await Promise.all(jsFiles.map(file => {
-			return readAndReplace(`${destLandDir}/js/${file}`, [{
-				//картинки
-				reg: /(src|href)="\/?.*\/([0-9@a-z_\+\'\-\s.]+\.(?:jpg|png|bmp))"/gi,
-				replaceTo: `$1="/landing/${landingName}/img/$2"`
-			}]);
+		await Promise.all(newLandFiles.map(file => {
+			if (/\.js/i.test(file)) {
+				return readAndReplace(file, [{
+					//картинки
+					reg: /(href|src)="\/?([^/]+)\//gi,
+					replaceTo: `$1="/landing/${landingName}/$2/`
+				}]);
+			}
+			
+			return Promise.resolve();
 		}));
+		
+		console.log('подменяем пути во всех css');
+		await Promise.all(newLandFiles.map(file => {
+			if (/\.css/i.test(file)) {
+				return readAndReplace(file, [{
+					//картинки
+					reg: /(background:url\("?\/)([^/]+)\//gi,
+					replaceTo: `$1landing/${landingName}/$2/`
+				}]);
+			}
+			
+			return Promise.resolve();
+		}));
+		
+		
 	} catch (err) {
 		onError(err);
 	}
@@ -305,8 +208,8 @@ process.exit(0);
 		]);
 		
 		await readAndReplace(`${destLandDir}/privacypolicy.html`, [{
-			reg: /(src|href)="\/?.*\/([0-9@a-z_\-]+\.(?:jpg|png|bmp))"/gi,
-			replaceTo: '$1="{{$publicPath}}/img/$2"'
+			reg: /(href|src)="(?:(?:https?:\/\/[\w\-]+\.[a-z]{2,})|(?:\/?([^/]+)))\//gi,
+			replaceTo: `$1="/landing/${landingName}/$2/`
 		}]);
 		
 		
