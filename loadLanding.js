@@ -20,64 +20,59 @@ const landDir = `./${landDirAbs}`;
 	};
 
 	const onError = async (err, message) => {
-		console.log(message, err);
-		await removeLandDir();
+		console.log(message || '', err);
+		//await removeLandDir();
 		process.exit(0);
 	};
 
 	try {
 		await fs.mkdirAsync(landDir);
 	} catch (err) {
-		onError('err: ', err);
+		onError(err);
 	}
 
 	console.log("Download files...");
-
 	try {
-		await exec(`wget -P ${landDir} -Hpr "${url}"`);
-	} catch (err) {
-		onError("ERROR: " + error);
+		await exec(`wget -P ${landDir} -l 0 -Hpr "${url}"`);
+	} catch(err) {
+		console.log(err);
 	}
 		
 	console.log('ok! Files has been downloaded');
-
-	const reg = /\?.*/i;
-
-	const getFilesForRename = async () => {
-		const landFiles = await recursiveReadAsync(landDir);
-		return landFiles.reduce((arr, file) => {
-			if (reg.test(file)) {
-				arr.push(file);
-			}
-
-			return arr;
-		}, []);
-	};
-
-	const filesForRename = await getFilesForRename();
-	console.log("переименовываем файлы ");
-
+	
 	try {
+		const reg = /\?.*/i;
+
+		const getFilesForRename = async () => {
+			const landFiles = await recursiveReadAsync(landDir);
+			return landFiles.reduce((arr, file) => {
+				if (reg.test(file)) {
+					arr.push(file);
+				}
+
+				return arr;
+			}, []);
+		};
+
+		const filesForRename = await getFilesForRename();
+		console.log("переименовываем файлы ");
+
 		await Promise.all(filesForRename.map(file => {
 			return fs.renameAsync(file, file.replace(reg, ""));
 		}));
-	} catch (err) {
-		onError('переименовывание с ошибкой', err);
-	}
 
-	const landFiles = await recursiveReadAsync(landDir);
-	const dirNames = landFiles.reduce((arr, filePath) => {
-		if (! /(?:(?:index\.html|privacypolicy)|\.(?:css|js|jpg|jpeg|png|bmp))/i.test(filePath)) {
+		const landFiles = await recursiveReadAsync(landDir);
+		const dirNames = landFiles.reduce((arr, filePath) => {
+			if (! /(?:(?:index\.html|privacypolicy)|\.(?:css|js|jpg|jpeg|png|bmp))/i.test(filePath)) {
+				return arr;
+			}
+			
+			arr.push(filePath);
 			return arr;
-		}
+		}, []);
 		
-		arr.push(filePath);
-		return arr;
-	}, []);
-	
-	const destLandDir = `./public/landing/${landingName}/`;
-	console.log("копируем в public");
-	try {
+		const destLandDir = `./public/landing/${landingName}/`;
+		console.log("копируем в public");
 		await fs.mkdirAsync(destLandDir);
 		await Promise.each(dirNames, dir => {
 			const reg = new RegExp(`^(${landDirAbs}\/[^/]+).*`, 'i');
@@ -88,22 +83,17 @@ const landDir = `./${landDirAbs}`;
 		//заменяем privacypolicy
 		await fs.renameAsync(`${destLandDir}privacypolicy`, `${destLandDir}privacypolicy.html`);
 		
-	} catch (err) {
-		onError(err);
-	}
-	
-	const readAndReplace = async (file, regHashes) => {
-		let text = await fs.readFileAsync(file, 'utf-8');
-	
-		const changedText = regHashes.reduce((textToChange, hash) => {
-			return textToChange.replace(hash.reg, hash.replaceTo);
-		}, text);
+		const readAndReplace = async (file, regHashes) => {
+			let text = await fs.readFileAsync(file, 'utf-8');
 		
-		return fs.writeFileAsync(file, changedText, 'utf-8');
-	};
-	
-	console.log("исправляем пути.... index.html");
-	try {
+			const changedText = regHashes.reduce((textToChange, hash) => {
+				return textToChange.replace(hash.reg, hash.replaceTo);
+			}, text);
+			
+			return fs.writeFileAsync(file, changedText, 'utf-8');
+		};
+		
+		console.log("исправляем пути.... index.html");
 		await readAndReplace(`${destLandDir}/index.html`, [{
 				//Удаляем ненужный файл
 				reg: /<script.*src=".*unload_submit\.js.*">.*<\/script>/,
@@ -138,31 +128,27 @@ const landDir = `./${landDirAbs}`;
 				replaceTo: 'action="/{{$thread}}/order"'
 			}
 		]);
-	} catch (err) {
-		onError(err);
-	}
-	
-	//удаляем лишние скрипты
-	let text = await fs.readFileAsync(`${destLandDir}/index.html`, 'utf-8');
-	const resReg = text.match(/(?:<link|<script).*(?:src|href)=".*".*>.*(?:<\/link>|<\/script>)/gi);
-	if (resReg) {
-		const itemsForRemove = resReg.reduce((arr, item) => {
-			if (/\.(?:js|css)/i.test(item)) {
+		
+		//удаляем лишние скрипты
+		let text = await fs.readFileAsync(`${destLandDir}/index.html`, 'utf-8');
+		const resReg = text.match(/(?:<link|<script).*(?:src|href)=".*".*>.*(?:<\/link>|<\/script>)/gi);
+		if (resReg) {
+			const itemsForRemove = resReg.reduce((arr, item) => {
+				if (/\.(?:js|css)/i.test(item)) {
+					return arr;
+				}
+				
+				arr.push(item);
 				return arr;
-			}
+			}, []);
 			
-			arr.push(item);
-			return arr;
-		}, []);
+			itemsForRemove.forEach(item => {
+				text = text.replace(item, '');
+			});
+			
+			await fs.writeFileAsync(`${destLandDir}/index.html`, text, 'utf-8');
+		}
 		
-		itemsForRemove.forEach(item => {
-			text = text.replace(item, '');
-		});
-		
-		await fs.writeFileAsync(`${destLandDir}/index.html`, text, 'utf-8');
-	}
-	
-	try {
 		const newLandFiles = await recursiveReadAsync(destLandDir);
 			
 		console.log('подменяем пути во всех js');
@@ -191,13 +177,7 @@ const landDir = `./${landDirAbs}`;
 			return Promise.resolve();
 		}));
 		
-		
-	} catch (err) {
-		onError(err);
-	}
-	
-	const viewsDir = `./resources/views/landings`;
-	try {
+		const viewsDir = `./resources/views/landings`;
 		await fs.copyFileAsync(`${destLandDir}/index.html`, `${viewsDir}/${landingName}.blade.php`);
 		
 		console.log('убираем за собой...');
@@ -211,9 +191,8 @@ const landDir = `./${landDirAbs}`;
 			reg: /(href|src)="(?:(?:https?:\/\/[\w\-]+\.[a-z]{2,})|(?:\/?([^/]+)))\//gi,
 			replaceTo: `$1="/landing/${landingName}/$2/`
 		}]);
-		
-		
 	} catch (err) {
 		onError(err);
 	}
+		
 })();
