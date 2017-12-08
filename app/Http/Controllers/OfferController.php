@@ -93,10 +93,11 @@ class OfferController extends Controller {
                 'offer' => $offer->id,
                 'err' => $result,
             ]);
-            return abort(404);
-        } else {
-            return redirect('/landing/' . $offer->landing->name . '/success.html');
-        }
+            //return abort(404);
+        } //else {
+            
+        return redirect('/landing/' . $offer->landing->name . '/success.html');
+        //}
 
     }
 }
