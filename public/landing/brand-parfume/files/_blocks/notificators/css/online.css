@@ -1,0 +1,5 @@
+.online-users-panel{border:1px solid #000;box-sizing:border-box;padding:10px 10px 10px 60px;background:url(/landing/brand-parfume/files/_blocks/notificators/img/users.png) 10px 50% no-repeat #ffffea;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif!important;font-size:12px;position:fixed;left:0;bottom:10px;width:265px;z-index:1000;color:#000}
+.close-online-users-panel{position:absolute;right:5px;border:1px solid #ccc;background:transparent;font-size:18px;display:block;width:20px;height:20px;line-height:0;top:5px;border-radius:3px;text-align:center;padding:0;margin: 0;box-shadow: none;}
+@media all and (max-width: 600px) {
+.online-users-panel{display:none}
+}

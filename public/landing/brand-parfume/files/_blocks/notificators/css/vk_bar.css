@@ -1,0 +1,24 @@
+#vk_bar, #vk_bar * {box-sizing: border-box;}
+#vk_bar{position:fixed;top:0;left:0;width:100%;min-height:80px;padding:10px 0;background:#000;background:rgba(0,0,0,.75);color: #fff !important;z-index:990;overflow:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+#vk_bar-container{position:relative;max-width:960px;width:100%;display:block;margin:0 auto;z-index:1;padding:0 20px}
+#vk_bar-close{position:absolute;display:block;width:25px;height:25px;top:0;right:10px;font-size:32px;line-height:25px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-weight:700;cursor:pointer;z-index:10;color:#fff;text-decoration: none !important;background: none !important;outline:none;border:none;}
+#vk_bar-close:hover{text-decoration:none;color:red}
+#vk_bar-text{background:url(../img/vk-logo.png) center left no-repeat;position:relative;font-family:Arial,Helvetica,sans-serif;font-size:24px;font-weight:700;line-height:1.4;float:left;width:calc(100% - 270px);text-align:center;text-shadow:1px 1px 1px #000;padding-left:60px;padding-top:10px}
+#vk_bar-text ins{text-decoration:none;color:#fff;display:inline-block;padding: 0 10px;background: #44688e;border-radius: 6px;}
+#vk_bar-timer__container{position:relative;width:235px;float:right;white-space:nowrap;text-align:center;padding-right:40px}
+#vk_bar-timer{text-align:center;font-size:0;line-height:60px;width:100%;text-shadow:1px 1px 1px #000}
+#vk_bar-heading{display:block;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:400;text-transform:uppercase;padding-top:10px}
+#vk_bar-timer .dgs{font-family:Arial,Helvetica,sans-serif;position:relative;display:inline-block;vertical-align:middle;font-size:45px;line-height:1;font-weight:700;width:70px;text-align:center}
+#vk_bar-timer .dgs:before{content:':';position:absolute;top:-4px;left:-7px}
+#vk_bar-timer .dgs:first-child:before{content:none}
+@media all and (max-width: 949px) {
+#vk_bar-text,#vk_bar-timer__container{float:none;margin:0 auto}
+#vk_bar-container{padding:0 2%}
+#vk_bar-text{background-position:top center;padding:70px 0 0;width:auto;font-size:22px}
+#vk_bar-timer__container{padding:0}
+#vk_bar-heading{font-size:13px}
+#vk_bar-close{font-size:42px}
+#vk_bar-timer{line-height:48px}
+#vk_bar-timer .dgs{font-size:38px}
+}
+
