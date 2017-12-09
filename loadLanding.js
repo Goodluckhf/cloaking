@@ -191,6 +191,13 @@ const landDir = `./${landDirAbs}`;
 			reg: /(href|src)="(?:(?:https?:\/\/[\w\-]+\.[a-z]{2,})|(?:\/?([^/]+)))\//gi,
 			replaceTo: `$1="/landing/${landingName}/$2/`
 		}]);
+
+		console.log("создаем success.html");
+		await fs.copyFileAsync('./loadLanding/success.html', `${destLandDir}/success.html`);
+		await readAndReplace(`${destLandDir}/success.html`, [{
+			reg: /(href|src)="(?:(?:https?:\/\/[\w\-]+\.[a-z]{2,})|(?:\/?([^/]+)))\//gi,
+			replaceTo: `$1="/landing/${landingName}/$2/`
+		}]);
 	} catch (err) {
 		onError(err);
 	}
